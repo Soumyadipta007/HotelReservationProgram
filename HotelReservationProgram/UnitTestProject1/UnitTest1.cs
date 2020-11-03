@@ -96,14 +96,14 @@ namespace UnitTestProject1
         {
             RewardCustomer rewardCustomer = new RewardCustomer();
             hotelSystem.AddHotel(new Hotel("Lakewood", 4, 80, 80, rewardCustomer));
-            hotelSystem.AddHotel(new Hotel("Bridgewood", 5, 110, 50, rewardCustomer));
-            hotelSystem.AddHotel(new Hotel("Ridgewood", 3, 100, 40, rewardCustomer));
+            hotelSystem.AddHotel(new Hotel("Bridgewood", 3, 110, 50, rewardCustomer));
+            hotelSystem.AddHotel(new Hotel("Ridgewood", 5, 100, 40, rewardCustomer));
             string[] dates = "10Dec2020,11Dec2020".Split(",");
             DateTime[] date = new DateTime[2];
             date[0] = DateTime.Parse(dates[0]);
             date[1] = DateTime.Parse(dates[1]);
             Hotel cheapestHotel = hotelSystem.GetCheapestHotelWithBestRating(date);
-            Assert.AreEqual(4, cheapestHotel.rating);
+            Assert.AreEqual("Ridgewood", cheapestHotel.name);
         }
     }
 }

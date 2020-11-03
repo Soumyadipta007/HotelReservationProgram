@@ -49,9 +49,10 @@ namespace HotelReservationProgram
         }
         public Hotel GetCheapestHotelWithBestRating(DateTime[] dates)
         {
-            Dictionary<Hotel, double> cheapestHotelAndPrice = CalculatePriceOfStay(dates);
-            var sortedListOfHotelAndPriceDuringGivenDate = cheapestHotelAndPrice.OrderBy(x => x.Value).ThenByDescending(x => x.Key.rating);
-            return sortedListOfHotelAndPriceDuringGivenDate.ElementAt(0).Key;
+            Dictionary<Hotel, double> HotelAndPrice = CalculatePriceOfStay(dates);
+            var sortedListOfHotelAndPriceDuringGivenDateByRate = HotelAndPrice.OrderBy(x => x.Value);
+            var sortedListOfHotelAndPriceDuringGivenDateByRateAndRating= HotelAndPrice.OrderByDescending(x => x.Key.rating);
+            return sortedListOfHotelAndPriceDuringGivenDateByRateAndRating.ElementAt(0).Key;
         }
         public Hotel GetHotelWithBestRating(DateTime[] dates)
         {
