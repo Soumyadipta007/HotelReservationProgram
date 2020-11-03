@@ -1,5 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using HotelReservationProgram;
+using System;
+
 namespace UnitTestProject1
 {
     [TestClass]
@@ -31,19 +33,7 @@ namespace UnitTestProject1
             hotelSystem.AddHotel(new Hotel("Lakewood", 10000, 11000));
             hotelSystem.AddHotel(new Hotel("Bridgewood", 5000, 6000));
             hotelSystem.AddHotel(new Hotel("Ridgewood", 20000, 21000));
-            string[] dates = "10Dec2020,11Dec2020".Split(",");
-            Hotel cheapestHotel = hotelSystem.GetCheapestHotel(dates, "Weekend");
-            Assert.AreEqual("Bridgewood", cheapestHotel.name);
-        }
-        [TestMethod]
-        public void GivenWeekendAndWeekdayRateReturnCheapestHotel()
-        {
-            hotelSystem.AddHotel(new Hotel("Lakewood", 10000, 11000));
-            hotelSystem.AddHotel(new Hotel("Bridgewood", 5000, 6000));
-            hotelSystem.AddHotel(new Hotel("Ridgewood", 20000, 21000));
-            string[] dates = "10Dec2020,11Dec2020".Split(",");
-            Hotel cheapestHotel = hotelSystem.GetCheapestHotel(dates, "Weekday");
-            Assert.AreEqual("Bridgewood", cheapestHotel.name);
-        }
+            Assert.AreEqual(11000, hotelSystem.hotelList[0].weekendRatesForRegularCustomer);
+        }        
     }
 }
