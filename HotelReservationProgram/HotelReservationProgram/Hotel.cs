@@ -14,7 +14,6 @@ namespace HotelReservationProgram
         public Hotel()
         {
             name = "";
-            ratesForRegularCustomer = 0;
             weekdayRatesForRegularCustomer = 0;
             weekendRatesForRegularCustomer = 0;
             rating = 0;
@@ -22,7 +21,7 @@ namespace HotelReservationProgram
         public Hotel(string name, int ratesForRegularCustomer)
         {
             this.name = name;
-            this.ratesForRegularCustomer = ratesForRegularCustomer;
+            weekdayRatesForRegularCustomer = ratesForRegularCustomer;
         }
         public Hotel(string name, int weekdayRatesForRegularCustomer, int weekendRatesForRegularCustomer)
         {
