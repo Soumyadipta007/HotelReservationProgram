@@ -19,7 +19,7 @@ namespace HotelReservationProgram
         public Hotel GetCheapestHotel(string[] dates)
         {
             DateTime[] validatedDates = checkDate.ValidateAndReturnDates(dates);
-            hotelList.Sort((e1, e2) => e1.weekdayRatesForRegularCustomer.CompareTo(e2.weekdayRatesForRegularCustomer));
+            hotelList.Sort((e1, e2) => e1.weekdayRatesForCustomer.CompareTo(e2.weekdayRatesForCustomer));
             return hotelList[0];
         }
         public Dictionary<Hotel, double> CalculatePriceOfStay(DateTime[] dates)
@@ -36,7 +36,7 @@ namespace HotelReservationProgram
             noOfWeekday = timeSpan.TotalDays - noOfWeekend + 1; 
             foreach (var hotel in hotelList)
             {
-                double priceDuringStay = hotel.weekdayRatesForRegularCustomer * noOfWeekday + hotel.weekendRatesForRegularCustomer * noOfWeekend;
+                double priceDuringStay = hotel.weekdayRatesForCustomer * noOfWeekday + hotel.weekendRatesForCustomer * noOfWeekend;
                 listOfHotelAndPrice.Add(hotel, priceDuringStay);
             }
             return listOfHotelAndPrice;
