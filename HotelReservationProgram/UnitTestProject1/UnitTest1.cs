@@ -13,16 +13,18 @@ namespace UnitTestProject1
         {
             string hotelName = "Lakewood";
             int ratesForRegularCustomer = 10000;
-            Hotel hotel = new Hotel(hotelName, ratesForRegularCustomer);
+            RegularCustomer regularCustomer = new RegularCustomer();
+            Hotel hotel = new Hotel(hotelName, ratesForRegularCustomer,regularCustomer);
             hotelSystem.AddHotel(hotel);
             Assert.AreEqual("Lakewood", hotelSystem.hotelList[0].name);
         }
         [TestMethod]
         public void GivenHotelOptionsReturnCheapestHotelForRegularCustomer()
         {
-            hotelSystem.AddHotel(new Hotel("Lakewood", 10000));
-            hotelSystem.AddHotel(new Hotel("Bridgewood", 5000));
-            hotelSystem.AddHotel(new Hotel("Ridgewood", 20000));
+            RegularCustomer regularCustomer = new RegularCustomer();
+            hotelSystem.AddHotel(new Hotel("Lakewood", 10000, regularCustomer));
+            hotelSystem.AddHotel(new Hotel("Bridgewood", 5000, regularCustomer));
+            hotelSystem.AddHotel(new Hotel("Ridgewood", 20000, regularCustomer));
             string[] dates = "10Dec2020,11Dec2020".Split(",");
             Hotel cheapestHotel = hotelSystem.GetCheapestHotel(dates);
             Assert.AreEqual("Bridgewood", cheapestHotel.name);
@@ -30,17 +32,19 @@ namespace UnitTestProject1
         [TestMethod]
         public void GivenWeekendAndWeekdayRatesReturnWeekendRateForRegularCustomer()
         {
-            hotelSystem.AddHotel(new Hotel("Lakewood", 10000, 11000));
-            hotelSystem.AddHotel(new Hotel("Bridgewood", 5000, 6000));
-            hotelSystem.AddHotel(new Hotel("Ridgewood", 20000, 21000));
+            RegularCustomer regularCustomer = new RegularCustomer();
+            hotelSystem.AddHotel(new Hotel("Lakewood", 10000, 11000, regularCustomer));
+            hotelSystem.AddHotel(new Hotel("Bridgewood", 5000, 6000, regularCustomer));
+            hotelSystem.AddHotel(new Hotel("Ridgewood", 20000, 21000, regularCustomer));
             Assert.AreEqual(11000, hotelSystem.hotelList[0].weekendRatesForCustomer);
         }
         [TestMethod]
         public void GivenWeekendAndWeekdayRateReturnCheapestHotelForRegularCustomer()
         {
-            hotelSystem.AddHotel(new Hotel("Lakewood", 10000, 11000));
-            hotelSystem.AddHotel(new Hotel("Bridgewood", 5000, 6000));
-            hotelSystem.AddHotel(new Hotel("Ridgewood", 20000, 21000));
+            RegularCustomer regularCustomer = new RegularCustomer();
+            hotelSystem.AddHotel(new Hotel("Lakewood", 10000, 11000, regularCustomer));
+            hotelSystem.AddHotel(new Hotel("Bridgewood", 5000, 6000, regularCustomer));
+            hotelSystem.AddHotel(new Hotel("Ridgewood", 20000, 21000, regularCustomer));
             string[] dates = "10Dec2020,11Dec2020".Split(",");
             DateTime[] date = new DateTime[2];
             date[0] = DateTime.Parse(dates[0]);
@@ -51,17 +55,19 @@ namespace UnitTestProject1
         [TestMethod]
         public void GivenRatingReturnRequiredRating()
         {
-            hotelSystem.AddHotel(new Hotel("Lakewood", 5, 10000, 11000));
-            hotelSystem.AddHotel(new Hotel("Bridgewood", 4, 5000, 6000));
-            hotelSystem.AddHotel(new Hotel("Ridgewood", 3, 20000, 21000));
+            RegularCustomer regularCustomer = new RegularCustomer();
+            hotelSystem.AddHotel(new Hotel("Lakewood", 5, 10000, 11000, regularCustomer));
+            hotelSystem.AddHotel(new Hotel("Bridgewood", 4, 5000, 6000, regularCustomer));
+            hotelSystem.AddHotel(new Hotel("Ridgewood", 3, 20000, 21000, regularCustomer));
             Assert.AreEqual(5, hotelSystem.hotelList[0].rating);
         }
         [TestMethod]
         public void GivenWeekendAndWeekdayRateReturnCheapestHotelAlongWithRatingForRegularCustomer()
         {
-            hotelSystem.AddHotel(new Hotel("Lakewood", 4, 10000, 11000));
-            hotelSystem.AddHotel(new Hotel("Bridgewood", 5, 5000, 6000));
-            hotelSystem.AddHotel(new Hotel("Ridgewood", 3, 20000, 21000));
+            RegularCustomer regularCustomer = new RegularCustomer();
+            hotelSystem.AddHotel(new Hotel("Lakewood", 4, 10000, 11000, regularCustomer));
+            hotelSystem.AddHotel(new Hotel("Bridgewood", 5, 5000, 6000, regularCustomer));
+            hotelSystem.AddHotel(new Hotel("Ridgewood", 3, 20000, 21000, regularCustomer));
             string[] dates = "10Dec2020,11Dec2020".Split(",");
             DateTime[] date = new DateTime[2];
             date[0] = DateTime.Parse(dates[0]);
@@ -72,9 +78,10 @@ namespace UnitTestProject1
         [TestMethod]
         public void GivenWeekendAndWeekdayRateReturnBestRatedRestaurantForRegularCustomer()
         {
-            hotelSystem.AddHotel(new Hotel("Lakewood", 4, 10000, 11000));
-            hotelSystem.AddHotel(new Hotel("Bridgewood", 5, 5000, 6000));
-            hotelSystem.AddHotel(new Hotel("Ridgewood", 3, 20000, 21000));
+            RegularCustomer regularCustomer = new RegularCustomer();
+            hotelSystem.AddHotel(new Hotel("Lakewood", 4, 10000, 11000,regularCustomer));
+            hotelSystem.AddHotel(new Hotel("Bridgewood", 5, 5000, 6000,regularCustomer));
+            hotelSystem.AddHotel(new Hotel("Ridgewood", 3, 20000, 21000,regularCustomer));
             string[] dates = "10Dec2020,11Dec2020".Split(",");
             DateTime[] date = new DateTime[2];
             date[0] = DateTime.Parse(dates[0]);
@@ -94,10 +101,10 @@ namespace UnitTestProject1
         [TestMethod]
         public void GivenWeekendAndWeekdayRateReturnBestRatedRestaurantForRewardCustomer()
         {
-            RewardCustomer rewardCustomer = new RewardCustomer();
-            hotelSystem.AddHotel(new Hotel("Lakewood", 4, 80, 80, rewardCustomer));
-            hotelSystem.AddHotel(new Hotel("Bridgewood", 3, 110, 50, rewardCustomer));
-            hotelSystem.AddHotel(new Hotel("Ridgewood", 5, 100, 40, rewardCustomer));
+            RegularCustomer regularCustomer = new RegularCustomer();
+            hotelSystem.AddHotel(new Hotel("Lakewood", 4, 80, 80, regularCustomer));
+            hotelSystem.AddHotel(new Hotel("Bridgewood", 3, 110, 50, regularCustomer));
+            hotelSystem.AddHotel(new Hotel("Ridgewood", 5, 100, 40, regularCustomer));
             string[] dates = "10Dec2020,11Dec2020".Split(",");
             DateTime[] date = new DateTime[2];
             date[0] = DateTime.Parse(dates[0]);
@@ -113,7 +120,18 @@ namespace UnitTestProject1
             hotelSystem.AddHotel(new Hotel("Bridgewood", 3, 110, 50, rewardCustomer));
             hotelSystem.AddHotel(new Hotel("Ridgewood", 5, 100, 40, rewardCustomer));
             string[] dates = "10Dec2020,11Dec2020".Split(",");            
-            Hotel cheapestHotel=hotelSystem.GivenWeekendAndWeekdayRateReturnBestRatedRestaurantForRewardCustomerWithRegexValidation(dates);
+            Hotel cheapestHotel=hotelSystem.GivenWeekendAndWeekdayRateReturnBestRatedRestaurantForCustomerWithRegexValidation(dates);
+            Assert.AreEqual("Ridgewood", cheapestHotel.name);
+        }
+        [TestMethod]
+        public void GivenWeekendAndWeekdayRateReturnBestRatedRestaurantForRegularCustomerWithRegexValidation()
+        {
+            RegularCustomer regularCustomer = new RegularCustomer();
+            hotelSystem.AddHotel(new Hotel("Lakewood", 4, 80, 80, regularCustomer));
+            hotelSystem.AddHotel(new Hotel("Bridgewood", 3, 110, 50, regularCustomer));
+            hotelSystem.AddHotel(new Hotel("Ridgewood", 5, 100, 40, regularCustomer));
+            string[] dates = "10Dec2020,11Dec2020".Split(",");
+            Hotel cheapestHotel = hotelSystem.GivenWeekendAndWeekdayRateReturnBestRatedRestaurantForCustomerWithRegexValidation(dates);
             Assert.AreEqual("Ridgewood", cheapestHotel.name);
         }
     }

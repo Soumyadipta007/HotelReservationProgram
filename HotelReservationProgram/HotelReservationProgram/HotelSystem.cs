@@ -61,7 +61,7 @@ namespace HotelReservationProgram
             var sortedListOfHotelDependingOnRating = cheapestHotelAndPrice.OrderByDescending(x => x.Key.rating);
             return sortedListOfHotelDependingOnRating.ElementAt(0).Key;
         }
-        public Hotel GivenWeekendAndWeekdayRateReturnBestRatedRestaurantForRewardCustomerWithRegexValidation(string[] dates)
+        public Hotel GivenWeekendAndWeekdayRateReturnBestRatedRestaurantForCustomerWithRegexValidation(string[] dates)
         {
             string regexDateValid = "^[0-9]{1,2}[A-Z]{1}[a-z]{2}[2]{1}[0]{1}[2-9]{1}[0-9]{1}";            
             bool regexValidation = false;

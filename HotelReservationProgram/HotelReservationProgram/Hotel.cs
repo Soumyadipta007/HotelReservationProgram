@@ -18,18 +18,18 @@ namespace HotelReservationProgram
             weekendRatesForCustomer = 0;
             rating = 0;
         }
-        public Hotel(string name, int ratesForRegularCustomer)
+        public Hotel(string name, int ratesForRegularCustomer, RegularCustomer regularCustomer)
         {
             this.name = name;
             weekdayRatesForCustomer = ratesForRegularCustomer;
         }
-        public Hotel(string name, int weekdayRatesForRegularCustomer, int weekendRatesForRegularCustomer)
+        public Hotel(string name, int weekdayRatesForRegularCustomer, int weekendRatesForRegularCustomer, RegularCustomer regularCustomer)
         {
             this.name = name;
             this.weekdayRatesForCustomer = weekdayRatesForRegularCustomer;
             this.weekendRatesForCustomer = weekendRatesForRegularCustomer;
         }
-        public Hotel(string hotelName, int rating, int weekdayRatesForRegularCustomer, int weekendRatesForRegularCustomer)
+        public Hotel(string hotelName, int rating, int weekdayRatesForRegularCustomer, int weekendRatesForRegularCustomer,RegularCustomer regularCustomer)
         {
             this.name = hotelName;
             this.rating = rating;
